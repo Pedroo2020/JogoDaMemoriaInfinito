@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import FormScreen from "./screens/FormScreen";
+import GameOverScreen from "./screens/GameOverScreen";
 import { useFonts } from "expo-font";
 import { ActivityIndicator, View } from "react-native";
 
@@ -33,6 +34,11 @@ export default function App() {
                     options={{ headerShown: false }}
                     name="Home"
                     component={HomeScreen}
+                />
+                <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="GameOverScreen"
+                    component={GameOverScreen}
                 />
             </Stack.Navigator>
         </NavigationContainer>
