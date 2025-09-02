@@ -1,10 +1,12 @@
 import * as React from "react";
-import {View, Text} from "react-native";
+import {View, Image} from "react-native";
 
 export default function HomeScreen() {
     return (
         <View>
-            <Text >Ola</Text>
+            <Image source={require("../assets/Fundo.png")} />
+
+            
         </View>
     )
 }

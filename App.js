@@ -9,14 +9,14 @@ export default function App() {
 
     return (
       <NavigationContainer>
-        <Stack.Navigator >
-          <Stack.Screen options={{ headerShown: false }}
+          <Stack.Navigator >
+              <Stack.Screen options={{ headerShown: false }}
+                            name={"Form"}
+                            component={FormScreen} />
+
+              <Stack.Screen options={{ headerShown: false }}
                         name={"Home"}
                         component={HomeScreen} />
-
-          <Stack.Screen options={{ headerShown: false }}
-                        name={"Form"}
-                        component={FormScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );
