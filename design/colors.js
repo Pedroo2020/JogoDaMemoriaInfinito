@@ -7,4 +7,6 @@ export default {
 
     blueDark: "#0F386A",
     blueBase: "#164886",
+
+    gray_100: "#F7F7F7"
 }
