@@ -1,6 +1,6 @@
 import {View, Image, StyleSheet} from 'react-native';
 
-export default function Logo({ width }) {
+export default function Logo({ width = 180 }) {
     return (
         <View>
             <Image
