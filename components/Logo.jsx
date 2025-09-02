@@ -1,6 +1,6 @@
 import {View, Image, StyleSheet} from 'react-native';
 
-export default function Logo({ width = 180 }) {
+export default function Logo({ width = 220 }) {
     return (
         <View>
             <Image
@@ -14,6 +14,6 @@ export default function Logo({ width = 180 }) {
 const styles = StyleSheet.create({
     logo: {
         resizeMode: "contain",
-        height: 100
+        height: 120
     }
 })
