@@ -14,5 +14,6 @@ export default function Logo({ width = 180 }) {
 const styles = StyleSheet.create({
     logo: {
         resizeMode: "contain",
+        height: 100
     }
 })
