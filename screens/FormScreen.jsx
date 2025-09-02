@@ -6,9 +6,8 @@ import Logo from "../components/Logo";
 export default function HomeScreen() {
     return (
         <ImageBackground source={require("../assets/Fundo.png")} style={styles.container}>
-                    <Logo />
-
-                    <FormCadastro />
+            <Logo />
+            <FormCadastro />
         </ImageBackground>
     )
 }

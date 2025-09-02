@@ -6,7 +6,7 @@ import TextBorder from "./TextBorder";
 const Info = ({ level = 0, onFinish }) => {
     return (
         <View style={styles.container}>
-            <TextBorder borderColor={colors.white} textColor={colors.redDark} fontSize={28} content={`Level: ${level}`} />
+            <TextBorder borderColor={colors.redDark} textColor={colors.white} fontSize={28} content={`Level: ${level}`} />
 
             <TouchableOpacity style={styles.button} onPress={onFinish}>
                 <Text style={styles.buttonText}>Finalizar</Text>
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        width: "100%",
         padding: 16,
     },
     button: {

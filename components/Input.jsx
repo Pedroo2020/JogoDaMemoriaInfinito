@@ -1,5 +1,4 @@
-import {StyleSheet, Text, TextInput, ImageBackground, View} from "react-native";
-import { Svg, Text as SvgText } from "react-native-svg";
+import {StyleSheet, TextInput, View} from "react-native";
 import colors from "../design/colors";
 import TextBorder from "./TextBorder";
 
