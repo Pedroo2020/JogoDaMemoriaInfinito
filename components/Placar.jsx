@@ -5,8 +5,7 @@ import img from "../assets/FichaRed.png";
 
 export default function Placar({
                                    nome,
-                                   pontos,
-                                   acao = () => true,
+                                   pontuacao,
                                    player2 = false
                                }) {
 
@@ -46,11 +45,11 @@ export default function Placar({
                     <View style={player}>
 
                         <View style={card}>
-                            <Text style={styles.pontos2}>100</Text>
+                            <Text style={styles.pontos2}>{pontuacao}</Text>
                         </View>
 
                         <ImageBackground style={styles.fichaVermelha} source={img}>
-                            <Text style={styles.nome}>Felipe</Text>
+                            <Text style={styles.nome}>{nome}</Text>
                         </ImageBackground>
 
                     </View>
@@ -58,12 +57,12 @@ export default function Placar({
                     <View style={player}>
 
                         <ImageBackground style={styles.fichaVermelha} source={img}>
-                            <Text style={styles.nome}>Felipe</Text>
+                            <Text style={styles.nome}>{nome}</Text>
                         </ImageBackground>
 
 
                         <View style={card}>
-                            <Text style={styles.pontos1}>100</Text>
+                            <Text style={styles.pontos1}>{pontuacao}</Text>
                         </View>
 
                     </View>

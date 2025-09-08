@@ -6,6 +6,7 @@ import FormScreen from "./screens/FormScreen";
 import GameOverScreen from "./screens/GameOverScreen";
 import { useFonts } from "expo-font";
 import { ActivityIndicator, View } from "react-native";
+import {UserProvider} from "./context/UserContext";
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -23,24 +24,27 @@ export default function App() {
     const Stack = createNativeStackNavigator();
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen
-                    options={{ headerShown: false }}
-                    name="Form"
-                    component={FormScreen}
-                />
-                <Stack.Screen
-                    options={{ headerShown: false }}
-                    name="Home"
-                    component={HomeScreen}
-                />
-                <Stack.Screen
-                    options={{ headerShown: false }}
-                    name="GameOverScreen"
-                    component={GameOverScreen}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <UserProvider>
+
+            <NavigationContainer>
+                <Stack.Navigator>
+                    <Stack.Screen
+                        options={{ headerShown: false }}
+                        name="Form"
+                        component={FormScreen}
+                    />
+                    <Stack.Screen
+                        options={{ headerShown: false }}
+                        name="Home"
+                        component={HomeScreen}
+                    />
+                    <Stack.Screen
+                        options={{ headerShown: false }}
+                        name="GameOverScreen"
+                        component={GameOverScreen}
+                    />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </UserProvider>
     );
 }

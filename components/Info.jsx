@@ -9,7 +9,7 @@ const Info = ({ level = 0, onFinish }) => {
             <TextBorder borderColor={colors.redDark} textColor={colors.white} fontSize={28} content={`Level: ${level}`} />
 
             <TouchableOpacity style={styles.button} onPress={onFinish}>
-                <Text style={styles.buttonText}>Finalizar</Text>
+                <Text style={styles.buttonText}>Finalizar partida</Text>
             </TouchableOpacity>
         </View>
     );
