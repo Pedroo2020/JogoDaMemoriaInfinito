@@ -7,6 +7,7 @@ import GameOverScreen from "./screens/GameOverScreen";
 import { useFonts } from "expo-font";
 import { ActivityIndicator, View } from "react-native";
 import {UserProvider} from "./context/UserContext";
+import { WinnerProvider } from "./context/WinnerContext";
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -25,26 +26,27 @@ export default function App() {
 
     return (
         <UserProvider>
-
-            <NavigationContainer>
-                <Stack.Navigator>
-                    <Stack.Screen
-                        options={{ headerShown: false }}
-                        name="Form"
-                        component={FormScreen}
-                    />
-                    <Stack.Screen
-                        options={{ headerShown: false }}
-                        name="Home"
-                        component={HomeScreen}
-                    />
-                    <Stack.Screen
-                        options={{ headerShown: false }}
-                        name="GameOverScreen"
-                        component={GameOverScreen}
-                    />
-                </Stack.Navigator>
-            </NavigationContainer>
+            <WinnerProvider>
+                <NavigationContainer>
+                    <Stack.Navigator>
+                        <Stack.Screen
+                            options={{ headerShown: false }}
+                            name="Form"
+                            component={FormScreen}
+                        />
+                        <Stack.Screen
+                            options={{ headerShown: false }}
+                            name="Home"
+                            component={HomeScreen}
+                        />
+                        <Stack.Screen
+                            options={{ headerShown: false }}
+                            name="GameOver"
+                            component={GameOverScreen}
+                        />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </WinnerProvider>
         </UserProvider>
     );
 }

@@ -1,14 +1,22 @@
 import {useContext, useEffect, useState} from "react";
-import {View, ImageBackground, StyleSheet, Alert} from "react-native";
-import * as React from "react";
+import {View, ImageBackground, StyleSheet} from "react-native";
 import Logo from "../components/Logo";
 import Card from "../components/Card";
 import Info from "../components/Info";
 import Placar from "../components/Placar";
 import {UserContext} from "../context/UserContext";
+import {useNavigation} from "@react-navigation/native";
+import { WinnerContext } from "../context/WinnerContext";
 
 export default function HomeScreen() {
+    // Obtém os usernames do content
     const { username } = useContext(UserContext);
+
+    // Obtém a função setWinner
+    const { setWinner } = useContext(WinnerContext);
+
+    // Declara o navigation
+    const navigation = useNavigation();
 
     // Jogador 1
     const [player1, setPlayer1] = useState({
@@ -50,6 +58,38 @@ export default function HomeScreen() {
 
     // Variável para armazenar o jogador atual
     const [currentPlayer, setCurrentPlayer] = useState();
+
+    // Retirar pontos com erro
+    function playerAnswer(isCorrect) {
+        let playerItem;
+        
+        // Atualiza a cópia de player
+        if (currentPlayer === "player1") {
+            playerItem = {...player1};
+        } else {
+            playerItem = {...player2};
+        }
+
+        // Atualiza a pontuação
+        if (!isCorrect) {
+            playerItem = {
+                ...playerItem,
+                pontuacao: playerItem.pontuacao - 3
+            }
+        } else {
+            playerItem = {
+                ...playerItem,
+                pontuacao: playerItem.pontuacao + 10
+            }
+        }
+
+        // Salva a pontuação do player
+        if (currentPlayer === "player1") {
+            return setPlayer1(playerItem);
+        } else {
+            return setPlayer2(playerItem);
+        }
+    }
 
     // Função para calcular a quantidade de pares
     function calcularQntPares(level) {
@@ -154,7 +194,7 @@ export default function HomeScreen() {
 
         // Caso tenha mais de uma carta virada
         if (newCartasViradas.length > 1) {
-            // Caso o conteúdo de ambas for igual
+            // Caso o conteúdo de ambas for igual (tentativa correta)
             if (newCartasViradas[0].content === newCartasViradas[1].content) {
                 // Mostra a carta clicada
                 listaAtualizada = listaAtualizada.map((item, indexItem) => newCartasViradas[0].index === indexItem || newCartasViradas[1].index === indexItem ? {
@@ -165,6 +205,18 @@ export default function HomeScreen() {
                 // Atualiza a lista pares
                 setPares(listaAtualizada);
 
+                setTimeout(() => {
+                    // Resposta correta
+                    playerAnswer(true);
+                }, 1000)
+            } else {
+                // Altera o player
+                setTimeout(() => {
+                    // Resposta errada
+                    playerAnswer(false);
+
+                    setCurrentPlayer(currentPlayer == 'player1' ? 'player2' : 'player1');
+                }, 1000)
             }
 
             // Limpa a lista de cartas viradas
@@ -193,17 +245,44 @@ export default function HomeScreen() {
         }
     }
 
+    // Função para encerrar o jogo
+    function finishGame() {
+        // Declara a variável
+        let winner;
+
+        // Define quem foi o vencedor
+        if (player1.pontuacao > player2.pontuacao) {
+            winner = player1.nome;
+        } else if (player1.pontuacao === player2.pontuacao) {
+            winner = "Empate!";
+        } else {
+            winner = player2.nome;
+        }
+
+        // Salva o vencedor
+        setWinner(winner);
+
+        // Redireciona para a tela de game over
+        return navigation.navigate('GameOver');
+    }
+
     // Ao carregar, carrega as primeiras cartas
     useEffect(() => {
         // Define aleatoriamente o jogador atual
-        const starterPlayer = Math.floor(Math.random());
+        const starterPlayer = Math.floor(Math.random() * 2);
 
+        // Declara a variável do current player
+        let currentPlayerText;
+        
         // Salva na variável
-        if (starterPlayer === 0) {
-            setCurrentLevel(player1);
+        if (starterPlayer === 1) {
+            currentPlayerText = "player1";
         } else {
-            setCurrentPlayer(player2);
+            currentPlayerText = "player2";
         }
+
+        // Salva o jogador atual
+        setCurrentPlayer(currentPlayerText);
 
         // Carrega o level 1
         loadNewLevel();
@@ -219,7 +298,7 @@ export default function HomeScreen() {
 
                 <Logo />
 
-                <Info level={currentLevel} onFinish={loadNewLevel} />
+                <Info level={currentLevel} onFinish={finishGame} />
 
                 <View style={styles.containerCards}>
                     {
@@ -230,8 +309,8 @@ export default function HomeScreen() {
                 </View>
 
                 <View style={styles.placar}>
-                    <Placar nome={player1.nome} pontuacao={player1.pontuacao} />
-                    <Placar player2={true} nome={player2.nome} pontuacao={player2.pontuacao} />
+                    <Placar nome={player1.nome} pontuacao={player1.pontuacao} currentPlayer={currentPlayer}/>
+                    <Placar player2={true} nome={player2.nome} pontuacao={player2.pontuacao} currentPlayer={currentPlayer}/>
                 </View>
             </View>
 

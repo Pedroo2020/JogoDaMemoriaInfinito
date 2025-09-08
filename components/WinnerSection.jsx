@@ -1,18 +1,10 @@
-import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import colors from "../design/colors";
 
-export default function WinnerSection() {
-    const navigation = useNavigation();
-
-    const jogarNovamente = () => {
-        navigation.navigate('HomeScreen');
-    };
-
+export default function WinnerSection({ playAgain }) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={jogarNovamente} style={styles.botao}>
+            <TouchableOpacity onPress={playAgain} style={styles.botao}>
                 <Text style={styles.textoBotao}>Jogar Novamente</Text>
             </TouchableOpacity>
         </View>
@@ -25,7 +17,7 @@ const styles = StyleSheet.create({
     },
     botao: {
         backgroundColor: colors.redDark,
-        borderRadius: 25,
+        borderRadius: 50,
         paddingVertical: 15,
         paddingHorizontal: 55,
         justifyContent: 'center',
@@ -33,7 +25,7 @@ const styles = StyleSheet.create({
     },
     textoBotao: {
         color: colors.white,
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: 'bold',
     },
 })

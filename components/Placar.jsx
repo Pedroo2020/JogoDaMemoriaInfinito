@@ -6,11 +6,14 @@ import img from "../assets/FichaRed.png";
 export default function Placar({
                                    nome,
                                    pontuacao,
-                                   player2 = false
+                                   player2 = false,
+                                   currentPlayer
                                }) {
 
-    let img = require("../assets/FichaRed.png")
+    // Imagem
+    let img = require("../assets/FichaRed.png");
 
+    // Estilo da pontuação
     let card = {
         backgroundColor: colors.redBase,
         width: 100,
@@ -20,21 +23,34 @@ export default function Placar({
         marginBottom: 30,
         marginHorizontal: -25,
         borderRadius: 40,
-        zIndex: 0,
+        zIndex: 0
     }
 
+    // Estilo do View 
     let player = {
         flexDirection: "row",
         justifyContent: "flex-start",
         alignItems: "flex-end",
         marginHorizontal: 20,
+        opacity: 1
     }
 
+    // Caso player2 true
     if (player2) {
         card.backgroundColor = colors.blueBase;
         player.alignItems = "flex-end";
         player.justifyContent = "flex-end";
-        img = require("../assets/FichaBlue.png")
+        img = require("../assets/FichaBlue.png");
+
+        // Caso o currentPlayer seja o player 1, diminui a opacidade
+        if (currentPlayer === "player1") {
+            player.opacity = 0.3;            
+        }
+    } else {
+       // Caso o currentPlayer seja o player 2, diminui a opacidade
+        if (currentPlayer === "player2") {
+            player.opacity = 0.3;            
+        } 
     }
 
     return (
