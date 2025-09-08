@@ -1,21 +1,24 @@
 import {Image, Text, View, StyleSheet, ImageBackground} from "react-native";
 import sizes from "../design/sizes";
 import colors from "../design/colors";
+import img from "../assets/FichaRed.png";
 
 export default function Placar({
                                    nome,
                                    pontos,
                                    acao = () => true,
-                                   player2 = false,
+                                   player2 = false
                                }) {
+
+    let img = require("../assets/FichaRed.png")
 
     let card = {
         backgroundColor: colors.redBase,
-        width: 120,
+        width: 100,
         height: 50,
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 35,
+        marginBottom: 30,
         marginHorizontal: -25,
         borderRadius: 40,
         zIndex: 0,
@@ -32,22 +35,40 @@ export default function Placar({
         card.backgroundColor = colors.blueBase;
         player.alignItems = "flex-end";
         player.justifyContent = "flex-end";
+        img = require("../assets/FichaBlue.png")
     }
 
     return (
         <View style={styles.container}>
 
-            <View style={player}>
+            {
+                player2 ? (
+                    <View style={player}>
 
-                <ImageBackground style={styles.fichaVermelha} source={require("../assets/FichaRed.png")}>
-                    <Text style={styles.nome}>Felipe</Text>
-                </ImageBackground>
+                        <View style={card}>
+                            <Text style={styles.pontos2}>100</Text>
+                        </View>
 
-                <View style={card}>
-                    <Text style={styles.pontos}>100</Text>
-                </View>
+                        <ImageBackground style={styles.fichaVermelha} source={img}>
+                            <Text style={styles.nome}>Felipe</Text>
+                        </ImageBackground>
 
-            </View>
+                    </View>
+                ) : (
+                    <View style={player}>
+
+                        <ImageBackground style={styles.fichaVermelha} source={img}>
+                            <Text style={styles.nome}>Felipe</Text>
+                        </ImageBackground>
+
+
+                        <View style={card}>
+                            <Text style={styles.pontos1}>100</Text>
+                        </View>
+
+                    </View>
+                )
+            }
 
         </View>
     )
@@ -62,20 +83,29 @@ const styles = StyleSheet.create({
     fichaVermelha: {
         justifyContent: "center",
         alignItems: "center",
-        width: 80,
-        height: 80,
+        width: 70,
+        height: 70,
         resizeMode: "contain",
         zIndex: 1,
         marginBottom: 20,
     },
 
     nome: {
-        fontSize: 17,
+        fontSize: 13,
         color: colors.white
     },
 
-    pontos: {
-        fontSize: 30,
+    pontos1: {
+        marginLeft: 15,
+        fontSize: 22,
         color: colors.white,
+        fontWeight: "bold",
     },
+
+    pontos2: {
+        marginRight: 15,
+        fontSize: 22,
+        color: colors.white,
+        fontWeight: "bold",
+    }
 })
