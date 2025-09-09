@@ -4,6 +4,8 @@ import Logo from "../components/Logo";
 import {useState, useContext} from "react";
 import { UserContext } from "../context/UserContext";
 import {useNavigation} from "@react-navigation/native";
+import { AdMobBanner } from 'expo-ads-admob';
+import configs from "../config/configs";
 
 export default function HomeScreen() {
 
@@ -40,6 +42,13 @@ export default function HomeScreen() {
                 username2={username2}
                 setUsername2={setUsername2}
                 onSubmit={onHandleLogin}
+            />
+
+            <AdMobBanner
+                bannerSize="fullBanner"
+                adUnitID={configs.adUnitID_DEV} // ID do bloco de anúncio
+                servePersonalizedAds={true} // Para anúncios personalizados
+                onDidFailToReceiveAdWithError={(error) => console.log(error)} // Tratamento de erro
             />
         </ImageBackground>
     )

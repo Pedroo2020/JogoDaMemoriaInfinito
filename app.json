@@ -20,10 +20,16 @@
         "foregroundImage": "./assets/Logo.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.pedrohenrique2806.JogoDaMemoriaInfinito"
     },
     "web": {
       "favicon": "./assets/Logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2354b196-f535-4e4c-af89-338e4c901a52"
+      }
     }
   }
 }
